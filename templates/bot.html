@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+
+    <h1> Welcome {{username}}</h1>
+
+    <div id="embedded_messenger">
+    <header id="message_header" onclick="Botkit.toggle()">Chat</header>
+    <iframe  id="botkit_client" src="https://aab0fe5a.ngrok.io/index.html"></iframe>
+    </div>
+        <script src="https://aab0fe5a.ngrok.io/embed.js"></script>
+    <script>
+    var options = {};
+    Botkit.boot(options);
+    Botkit.activate();
+    </script>
+    <link rel="stylesheet" href="https://aab0fe5a.ngrok.io/embed.css" />
+
+</body>
+</html>
