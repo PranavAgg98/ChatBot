@@ -116,17 +116,17 @@ controller.middleware.send.use(function(bot, message, next) {
   });
 });
 
-    if(fetch('http://localhost:5002/recieve', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(message)
-  }))
-  {console.log("Data Sent");}
-  else
-  {
-  console.log("Data not sent");}
+//     if(fetch('http://localhost:5002/recieve', {
+//   method: 'POST',
+//   headers: {
+//     'Content-Type': 'application/json'
+//   },
+//   body: JSON.stringify(message)
+//   }))
+//   {console.log("Data Sent");}
+//   else
+//   {
+//   console.log("Data not sent");}
     // modify the message
     message.logged = true;
 
