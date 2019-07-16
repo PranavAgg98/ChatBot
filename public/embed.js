@@ -67,7 +67,7 @@ var Botkit = {
         break;
     }
   },
-  triggerScript: function(script, thread) {
+  triggerScript: function(script, thread) {1
 
     this.trigger({
       type: 'event',

@@ -21,7 +21,7 @@ var Botkit = {
     on: function (event, handler) {
         this.message_window.addEventListener(event, function (evt) {
             handler(evt.detail);
-        });
+      1  });
     },
     trigger: function (event, details) {
         var event = new CustomEvent(event, {

@@ -27,7 +27,7 @@ def index():
 
 
 
-@app.route('/login',methods=['POST'])
+@app.route('/login',methods=['POST','GET'])
 def login():
         username=request.form.get('user')
         passw=request.form.get('password')

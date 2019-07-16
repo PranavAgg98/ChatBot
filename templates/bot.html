@@ -1,22 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-</head>
-<body>
+<html>
 
-    <h1> Welcome {{username}}</h1>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+</head>
+
+<body>
+    <section class="hero is-primary is-fullheight">
+
+ <!--    <h1> Welcome {{username}}</h1> -->
+        <div class="hero-body">
+            <div class="container has-text-centered">
+               <h3 class="title">Welcome</h3>
+            </div>
+        </div>
 
     <div id="embedded_messenger">
     <header id="message_header" onclick="Botkit.toggle()">Chat</header>
-    <iframe  id="botkit_client" src="https://aab0fe5a.ngrok.io/index.html"></iframe>
+    <iframe  id="botkit_client" src="http://fce1344a.ngrok.io/index.html"></iframe>
     </div>
-        <script src="https://aab0fe5a.ngrok.io/embed.js"></script>
+        <script src="http://fce1344a.ngrok.io/embed.js"></script>
     <script>
     var options = {};
     Botkit.boot(options);
     Botkit.activate();
     </script>
-    <link rel="stylesheet" href="https://aab0fe5a.ngrok.io/embed.css" />
+    <link rel="stylesheet" href="http://fce1344a.ngrok.io/embed.css" />
 
+
+</section>
 </body>
+
 </html>

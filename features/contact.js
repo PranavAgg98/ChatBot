@@ -8,7 +8,7 @@ module.exports = function(controller) {
         controller.hears('contact', 'message', async (bot, message) => {
 
             await bot.reply(message,{
-                text: 'How can i help you?',
+                text: 'Which department would you like to contact?',
                 quick_replies: [
                     {
                       title: 'Location',

@@ -1,5 +1,5 @@
 
-
+var request = require('request');
 // Import Botkit's core features
 const { Botkit } = require('botkit');
 const { BotkitCMSHelper } = require('botkit-plugin-cms');
@@ -10,8 +10,26 @@ const { WebAdapter } = require('botbuilder-adapter-web');
 
 const { MongoDbStorage } = require('botbuilder-storage-mongodb');
 
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+
+//const adapter = new WebAdapter();
 // Load process.env values from .env file
 require('dotenv').config();
+
+process.env.uri='http://brick-damselfly.glitch.me'
+process.env.cms_token='youwillneverguessmysecretbottoken'
+
+var MongoClient = require('mongodb').MongoClient
+  , assert = require('assert');
+
+// Connection URL
+var url = 'mongodb://localhost:27017/mydb';
+// Use connect method to connect to the Server
+MongoClient.connect(url,{useNewUrlParser: true }, function(err, db) {
+  if (err) throw err;
+  console.log("Database created!");
+  db.close();
+});
 
 
 
@@ -35,9 +53,9 @@ const controller = new Botkit({
     storage
 });
 
-if (process.env.cms_uri) {
+if (process.env.uri) {
     controller.usePlugin(new BotkitCMSHelper({
-        cms_uri: process.env.cms_uri,
+        uri: process.env.uri,
         token: process.env.cms_token,
     }));
 }
@@ -63,30 +81,57 @@ controller.ready(() => {
 
 });
 
-//controller.middleware.receive.use(function(bot, message, next) {
-//
-//    // log it
-//    console.log('RECEIVED: ', message);
-//
-//    // modify the message
-//    message.logged = true;
-//
-//    // continue processing the message
-//    next();
-//
-//});
-//
-//// Log every message sent
-//controller.middleware.send.use(function(bot, message, next) {
-//
-//    // log it
-//    console.log('SENT: ', message);
-//
-//    // modify the message
-//    message.logged = true;
-//
-//    // continue processing the message
-//    next();
-//
-//});
-//
+
+
+
+controller.middleware.ingest.use(function(bot, message, next) {
+    if (message.incoming_message.text != null)
+    {
+    MongoClient.connect(url,{useNewUrlParser: true },function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("mydb");
+        dbo.collection("pipe").insertOne(message.incoming_message, function(err, res) {
+            if (err) throw err;
+            console.log("1 message recieved");
+            db.close();
+            });
+        });
+    message.logged = true;
+    }
+    next();
+});
+
+
+
+controller.middleware.send.use(function(bot, message, next) {
+
+    // log it
+     MongoClient.connect(url,{useNewUrlParser: true },function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+   dbo.collection("pipe").insertOne(message, function(err, res) {
+    if (err) throw err;
+    console.log("1 message sent");
+    db.close();
+  });
+});
+
+    if(fetch('http://localhost:5002/recieve', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(message)
+  }))
+  {console.log("Data Sent");}
+  else
+  {
+  console.log("Data not sent");}
+    // modify the message
+    message.logged = true;
+
+    // continue processing the message
+    next();
+
+});
+

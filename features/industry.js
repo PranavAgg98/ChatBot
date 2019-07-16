@@ -18,7 +18,7 @@ module.exports = function(controller) {
                     },
                     {
                         title: 'Contact Centers',
-                        payload: 'Contact Centers',
+                        payload: 'Centers',
                     }
                 ]
             });
@@ -35,7 +35,7 @@ module.exports = function(controller) {
          await bot.reply(message, ' <https://www.sms-magic.com/industries/education/>');
     });
 
-    controller.hears('Contact Centers','message', async(bot,message) => {
+    controller.hears('Centers','message', async(bot,message) => {
         await bot.reply(message, 'Deliver fast responses, convert more calls thanks to guidance and effectively measure agent performance.');
          await bot.reply(message, '<https://www.sms-magic.com/industries/contact-centers/>');
     });
