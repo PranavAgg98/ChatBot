@@ -16,8 +16,6 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 // Load process.env values from .env file
 require('dotenv').config();
 
-process.env.uri='http://brick-damselfly.glitch.me'
-process.env.cms_token='youwillneverguessmysecretbottoken'
 
 var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
