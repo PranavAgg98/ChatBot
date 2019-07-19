@@ -14,6 +14,8 @@ ngrok is used to tunnel from a public endpoint to localhost.
 ~~~
 In  /templates/bot.html the url has to be replaced by ngrok url generated
 
+Run mongo server as well as server from api folder.
+
 ### Flask app Setup
 
 The flask server is run:
